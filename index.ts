@@ -10,9 +10,9 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import morgan from 'morgan';
 import { connectToDb } from './src/connections';
+import { analyzeDataByKeywords } from './src/apps/ThreatenMe/analytics/analyze';
 const PORT = process.env.PORT || 8081;
 connectToDb();
-
 const startServer = async () => {
   const app = express();
   app.use(cookieParser());
@@ -65,3 +65,4 @@ const startServer = async () => {
   });
 };
 startServer();
+analyzeDataByKeywords();

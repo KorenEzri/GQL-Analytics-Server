@@ -1,23 +1,20 @@
-export const countOccurrences = (
-  string: string | any[],
-  subString: string,
-  allowOverlapping: boolean,
+export const checkForProfanity = (
+  data: string | string[],
+  subStringList: string[],
 ) => {
-  string += '';
-  subString += '';
-  if (subString.length <= 0)
-    return { count: string.length + 1, words_matched: 'none' };
-  const matchedWords: string[] = [];
-  var n = 0,
-    pos = 0,
-    step = allowOverlapping ? 1 : subString.length;
-  while (true) {
-    pos = string.indexOf(subString, pos);
-    if (pos >= 0) {
-      ++n;
-      matchedWords.push(subString);
-      pos += step;
-    } else break;
+  const regex = subStringList.map(badword => `${badword}`).join('|');
+  const regexp = new RegExp(`\\b(?<!@)(${regex})\\b`, 'gi');
+  if (Array.isArray(data)) {
+    const isBad = data.map(text => text.match(regexp));
+    return {
+      badword_count: isBad.length || 0,
+      bad_words: isBad,
+    };
+  } else {
+    const isBad = data.match(regexp);
+    return {
+      badword_count: isBad?.length || 0,
+      bad_words: isBad,
+    };
   }
-  return { count: n, words_matched: matchedWords };
 };

@@ -1,9 +1,8 @@
 import { network, routes } from '../../network';
 
-export const getDataFromTMDatabaseBySource = async (source: string) => {
+export const getDataFromTMDatabaseBySource = async () => {
   try {
-    // @ts-ignore
-    const { data } = await network.get(routes.ThreatenMeDB[source]);
+    const { data } = await network.get(`${routes.ThreatenMeDB}false`);
     return { data, status: 'OK' };
   } catch ({ message }) {
     console.log(
