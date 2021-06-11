@@ -1,4 +1,5 @@
 import { GraphQLScalarType } from 'graphql';
+import { analyzeDataByKeywords } from '../analytics/analyze';
 
 const dateScalar = new GraphQLScalarType({
   name: 'Date',
@@ -15,6 +16,9 @@ export const ThreatenMeResolvers = {
     test: async () => {
       console.log('TEST PASSED!');
       return 'OK!';
+    },
+    updatechecked: async () => {
+      await analyzeDataByKeywords();
     },
   },
 };

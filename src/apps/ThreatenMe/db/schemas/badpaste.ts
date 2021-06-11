@@ -1,19 +1,22 @@
 import mongoose, { Schema } from 'mongoose';
-import { IBadPasteDoc } from '../../../../../types';
+import { PasteDoc } from '../../types';
 
 const badPasteDbSchema: Schema = new mongoose.Schema({
-  source: { type: String, unique: true },
+  __id: String,
+  uniqueIdentifier: { type: String, unique: true },
+  checked: { type: Boolean, default: false },
+  source: String,
   title: String,
   language: String,
   posted_by: String,
   body: String,
-  bad_word_count: Number,
-  bad_words: Array,
-  sexual_word_count: Number,
-  sexual_words: Array,
-  sentiment: Object,
+  badword_count: Number,
+  badwords: Array,
+  title_sentiment: Number,
+  body_sentiment: Number,
+  threat_level: Number,
   createdAt: Date || String,
-  updatedAt: Date || String,
+  updatedAt: { type: Date || String, default: new Date() },
 });
 
 badPasteDbSchema.set('toJSON', {
@@ -22,7 +25,4 @@ badPasteDbSchema.set('toJSON', {
   },
 });
 
-export const BadPaste = mongoose.model<IBadPasteDoc>(
-  'BadPaste',
-  badPasteDbSchema,
-);
+export const BadPaste = mongoose.model<PasteDoc>('BadPaste', badPasteDbSchema);

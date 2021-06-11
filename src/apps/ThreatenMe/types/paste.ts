@@ -17,9 +17,5 @@ export interface IPaste {
   createdAt?: Date | string;
   updatedAt?: Date | string;
 }
-export interface IPastes {
-  source: string;
-  pastes: IPaste[];
-}
-
-export interface PastesDoc extends Document, IPastes {}
+// @ts-ignore
+export interface PasteDoc extends Document, IPaste {}
