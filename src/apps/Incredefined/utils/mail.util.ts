@@ -1,5 +1,4 @@
 import nodemailer, { SendMailOptions } from 'nodemailer';
-import Logger from '../logger/logger';
 
 require('dotenv').config();
 
@@ -19,7 +18,6 @@ export const sendMail = async (options: SendMailOptions) => {
     await transporter.sendMail(options);
     return true;
   } catch ({ message }) {
-    Logger.error(message);
     return false;
   }
 };
