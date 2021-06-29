@@ -19,6 +19,7 @@ export const ThreatenMeResolvers = {
     },
     updatechecked: async () => {
       await analyzeDataByKeywords();
+      return 'OK';
     },
   },
 };
